@@ -1,0 +1,20 @@
+* The goal is to check that if we start at some index in the circular array, will we be able to reach to 
+the same index after completing the circle, if we are able to do so, we have to return -1, else we have to 
+return the starting index starting from which we can complete the entire circuit
+
+-> The very first thing to observe is that if the total summation of gas is less than the total summation of cost,
+then in that case its never possible to complete the entire circuit 
+For eg. gas=[2,3,4], cost=[3,4,3]
+Here, at index 0, we will have gas amount as 2 and required amount of gas is 3 i.e. the cost to move from 0th 
+to 1st index, therefore the starting index cant be 0
+
+Similarly, 3<4 therefore, its not possible to have 1 as starting index either.
+if starting index is considered as 2, then we have gas filled as 4, and cost to move from 2nd to 0th index is 3
+i.e. we can jump from 2nd to 0th index, at 0th index we will have gas as(1+2)=3 and cost 3 therefore, at index 
+2 we will have 0 gas remaining, even if we fill 3 here , we will not have sufficient cost to move from 2st to 2nd index.
+
+-> if that is not the case i.e. if totalGas>=totalCost, then we will get a unique answer definitely.
+-> Initialise the currGas=0 and starting Idx as 0 and then traverse over the array, if at any index,
+we get (gas[i]-cost[i])<0 then that cant be the starting index so we will update that to current index+1
+and the loop goes on till the end.
+-> At the end of the loop we will have the start index value.
