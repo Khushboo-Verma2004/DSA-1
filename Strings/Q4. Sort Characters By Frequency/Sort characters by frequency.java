@@ -1,28 +1,20 @@
-
+//Optimised approach using hashmap and priority queue
 class Solution {
     public String frequencySort(String s) {
-        int[] freq = new int[128];
-        for (int i = 0; i < s.length(); i++) {
-            freq[s.charAt(i)]++;
+        String result = "";
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i<s.length(); i++){
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i),0)+1);
         }
-        StringBuilder result = new StringBuilder();
-        while (true) {
-            int maxFreq = 0;
-            char maxChar = 0;
-            for (int i = 0; i < 128; i++) {
-                if (freq[i] > maxFreq) {
-                    maxFreq = freq[i];
-                    maxChar = (char) i;
-                }
+        PriorityQueue<Character> pq = new PriorityQueue<>((a,b)->map.get(b)-map.get(a)); //This pq will arrange the characters in descending order of their freq counts.
+        pq.addAll(map.keySet());
+        while(!pq.isEmpty()){
+            char curr= pq.poll();
+            int frequency = map.get(curr);
+            for (int i = 0; i < frequency; i++) {
+                result+=curr;
             }
-            if (maxFreq == 0) {
-                break;
-            }
-            while (maxFreq-- > 0) {
-                result.append(maxChar);
-            }
-            freq[maxChar] = 0;
         }
-        return result.toString();
+        return result;
     }
 }
