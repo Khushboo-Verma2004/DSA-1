@@ -1,0 +1,8 @@
+ALGORITHM:
+1. First connect odd-indexed nodes together and even indexed nodes together simultaneously.
+
+2. Continue this until even becomes null or even's next becomes null.
+
+3. After completely connecting both chain, connect odd's next to evenHead.
+
+4. Return head.
