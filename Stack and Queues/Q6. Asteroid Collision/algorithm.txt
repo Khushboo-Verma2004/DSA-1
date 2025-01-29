@@ -1,0 +1,21 @@
+ALGORITHM:
+    1. Initialize Stack:
+        (a) Create an empty stack st to store asteroids.
+
+    2. Iterate Through Asteroids:
+        (a) If the asteroid is positive, push it onto the stack (it’s moving right).
+
+        (b) If the asteroid is negative (it’s moving left):
+                (A) While the stack is not empty, the top of the stack is positive, and the magnitude of the negative asteroid is greater than the top, pop the top of the stack (collision destroys the smaller asteroid).
+
+                (B) If the stack is not empty and the top of the stack equals the negative asteroid’s magnitude, pop the top (both are destroyed).
+
+                (C) If the stack is empty or the top of the stack is negative, push the negative asteroid onto the stack (no collision occurs).
+
+    3. Build Result:
+        (a) Create an array ans to store the remaining asteroids.
+
+        (b) Pop elements from the stack in reverse order to fill the result.
+
+    4. Return Result: 
+        (a) Return the array ans.
