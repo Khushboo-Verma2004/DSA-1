@@ -1,11 +1,12 @@
 class Solution:
     def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
-        total = 0
+        queue = deque(enumerate(tickets))  # Store (index, tickets)
+        time = 0
 
-        for i, x in enumerate(tickets):
-            if i <= k:
-                total += min(tickets[i], tickets[k])
-            else:
-                total += min(tickets[i], tickets[k] - 1)
-
-        return total
+        while queue:
+            i, t = queue.popleft()
+            time += 1
+            if t - 1 > 0:
+                queue.append((i, t - 1))
+            if i == k and t == 1:
+                return time  # Stop when `k` buys their last ticket
